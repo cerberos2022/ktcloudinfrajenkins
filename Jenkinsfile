@@ -8,7 +8,7 @@ pipeline {
     }
    stage('image build and push ') {
         steps {
-          sh```
+          sh ```
            #!/bin/bash
             # 에러 발생 시 즉시 스크립트 중단
             set -e
