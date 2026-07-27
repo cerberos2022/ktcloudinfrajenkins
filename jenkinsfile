@@ -36,9 +36,11 @@ pipeline {
     stage('delivery and deployment using k8s') {
       steps {
         sh '''
-        ansible master -m shell -a "kubectl --kubeconfig=/etc/kubernetes/admin.conf get no"
-        '''
+          ansible all -m ansible.builtin.copy -a "src=/local/deploy.yml dest=/remote/deploy.yml mode=0644" 
+          ansible master -m shell -a "kubectl apply -f /remote/deploy.yml"
+      '''
       }
     }
+
   }
 }
